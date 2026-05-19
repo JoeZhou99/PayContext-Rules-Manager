@@ -31,6 +31,14 @@ Cmd+Shift+P → PayContext: 初始化预置规则模板
 
 这会在项目目录创建 `.paycontext/rules/` 文件夹，包含 6 个内置规则模板。
 
+**首次打开时的欢迎提示：**
+
+![首次打开提示初始化预置模板](media/screenshots/01-welcome-init.png)
+
+**初始化后生成的规则文件目录：**
+
+![.paycontext/rules 规则文件目录](media/screenshots/02-rules-directory.png)
+
 ### 3. 选择并注入规则
 
 **方法一：快捷键（推荐）**
@@ -38,12 +46,16 @@ Cmd+Shift+P → PayContext: 初始化预置规则模板
 Cmd+Shift+Alt+P  →  弹出规则选择面板（可多选）→ Enter 确认注入
 ```
 
+![快速选择规则并注入到 .cursorrules](media/screenshots/04-quickpick-inject.png)
+
 **方法二：侧边栏**
 - 点击左侧活动栏的 💳 图标打开 PayContext 面板
 - 在"规则库"中右键规则 → "注入规则"
 
+![侧边栏规则库按分类展示](media/screenshots/03-sidebar-rules.png)
+
 **方法三：状态栏**
-- 点击左下角状态栏的 `⚡ PayContext: N 条规则已注入`
+- 点击左下角状态栏的 `⚡ PayContext: N 条规则已注入`（未注入时显示 `PayContext: 无规则`）
 
 ## 内置规则模板
 
