@@ -1,0 +1,195 @@
+{
+  "name": "paycontext-rules-manager",
+  "displayName": "PayContext Rules Manager",
+  "description": "自动管理并注入支付业务规则到 .cursorrules，让 AI 始终理解你的支付逻辑、币种精度和合规要求",
+  "version": "0.1.0",
+  "publisher": "paycontext",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Snippets"
+  ],
+  "keywords": [
+    "cursor",
+    "cursorrules",
+    "payment",
+    "AI",
+    "prompt",
+    "rules"
+  ],
+  "icon": "media/icon.png",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "paycontext-sidebar",
+          "title": "PayContext Rules",
+          "icon": "media/sidebar-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "paycontext-sidebar": [
+        {
+          "id": "paycontext.rulesView",
+          "name": "规则库",
+          "icon": "media/sidebar-icon.svg"
+        },
+        {
+          "id": "paycontext.activeView",
+          "name": "当前注入规则"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "paycontext.injectRule",
+        "title": "注入规则到 .cursorrules",
+        "icon": "$(zap)"
+      },
+      {
+        "command": "paycontext.appendRule",
+        "title": "追加规则到 .cursorrules",
+        "icon": "$(add)"
+      },
+      {
+        "command": "paycontext.clearRules",
+        "title": "清空 .cursorrules",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "paycontext.newRule",
+        "title": "新建规则",
+        "icon": "$(new-file)"
+      },
+      {
+        "command": "paycontext.editRule",
+        "title": "编辑规则",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "paycontext.deleteRule",
+        "title": "删除规则",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "paycontext.openRuleEditor",
+        "title": "打开规则编辑器",
+        "icon": "$(layout-panel)"
+      },
+      {
+        "command": "paycontext.initTemplates",
+        "title": "初始化预置规则模板",
+        "icon": "$(cloud-download)"
+      },
+      {
+        "command": "paycontext.quickPick",
+        "title": "PayContext: 快速选择并注入规则"
+      },
+      {
+        "command": "paycontext.showStatus",
+        "title": "PayContext: 查看当前注入状态"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "paycontext.newRule",
+          "when": "view == paycontext.rulesView",
+          "group": "navigation"
+        },
+        {
+          "command": "paycontext.initTemplates",
+          "when": "view == paycontext.rulesView",
+          "group": "navigation"
+        },
+        {
+          "command": "paycontext.clearRules",
+          "when": "view == paycontext.activeView",
+          "group": "navigation"
+        },
+        {
+          "command": "paycontext.openRuleEditor",
+          "when": "view == paycontext.rulesView",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "paycontext.injectRule",
+          "when": "view == paycontext.rulesView && viewItem == rule",
+          "group": "inline"
+        },
+        {
+          "command": "paycontext.appendRule",
+          "when": "view == paycontext.rulesView && viewItem == rule",
+          "group": "inline"
+        },
+        {
+          "command": "paycontext.editRule",
+          "when": "view == paycontext.rulesView && viewItem == rule"
+        },
+        {
+          "command": "paycontext.deleteRule",
+          "when": "view == paycontext.rulesView && viewItem == rule"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "paycontext.quickPick",
+        "key": "ctrl+shift+p",
+        "mac": "cmd+shift+alt+p",
+        "when": "!inQuickOpen"
+      }
+    ],
+    "configuration": {
+      "title": "PayContext Rules Manager",
+      "properties": {
+        "paycontext.rulesDirectory": {
+          "type": "string",
+          "default": ".paycontext/rules",
+          "description": "规则文件存储目录（相对于工作区根目录）"
+        },
+        "paycontext.autoInjectOnOpen": {
+          "type": "boolean",
+          "default": false,
+          "description": "打开项目时自动注入上次使用的规则"
+        },
+        "paycontext.showStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "在状态栏显示当前注入的规则"
+        },
+        "paycontext.backupCursorRules": {
+          "type": "boolean",
+          "default": true,
+          "description": "注入前备份现有 .cursorrules 文件"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.3.0",
+    "@vscode/vsce": "^2.22.0"
+  }
+}
